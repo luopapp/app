@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "luopapp",
-    "slug": "luopapp",
+    "name": "Luop",
+    "slug": "Electronic magnifying glass app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

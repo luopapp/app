@@ -1,18 +1,11 @@
 module.exports = {
-  extends: [
-    'universe',
-   'universe/shared/typescript-analysis',
+  extends: ["universe", "universe/shared/typescript-analysis"],
+  overrides: [
+    {
+      files: ["*.ts", "*.tsx", "*.d.ts"],
+      parserOptions: {
+        project: "./tsconfig.json",
+      },
+    },
   ],
- overrides: [
-   {
-     files: [
-       '*.ts',
-       '*.tsx',
-       '*.d.ts'
-     ],
-     parserOptions: {
-       project: './tsconfig.json'
-     },
-   },
- ],
 };
