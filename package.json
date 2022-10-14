@@ -6,7 +6,10 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prepare": "husky install",
+    "lint": "yarn eslint .",
+    "lint:fix": "yarn eslint . --fix"
   },
   "dependencies": {
     "expo": "~46.0.13",
@@ -28,6 +31,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.31.8",
+    "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "typescript": "*"
   }
