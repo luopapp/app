@@ -1,38 +1,22 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { StackScreenProps } from "@react-navigation/stack";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { useState } from "react";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
-export default function App() {
+import { StackParamList } from "../../App";
+import { styles } from "./styles";
+
+type Props = StackScreenProps<StackParamList>;
+
+function CameraScreen({ navigation }: Props) {
   const [camera, setCamera] = useState<Camera | null>(null);
   const MAX_ZOOM = 1;
   const MIN_ZOOM = 0;
 
   const [type, setType] = useState(CameraType.back);
   const [zoom, setZoom] = useState(MIN_ZOOM);
-  const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [status, requestMediaLibraryPermission] = MediaLibrary.usePermissions();
-
-  if (!permission) {
-    return <View />;
-  }
-  function requestPermissions() {
-    requestPermission();
-    requestMediaLibraryPermission();
-  }
-
-  if (!permission.granted || !status?.granted) {
-    return (
-      <View style={styles.container}>
-        <Text style={{ textAlign: "center" }}>
-          Precisamos da sua permissão para mostrar a câmera e salvar novas
-          imagens
-        </Text>
-        <Button onPress={requestPermissions} title="Permitir acessos ao Luop" />
-      </View>
-    );
-  }
 
   function toggleCameraType() {
     setType((current) =>
@@ -70,6 +54,10 @@ export default function App() {
     }
   }
 
+  function handleToGallery() {
+    navigation.push("gallery");
+  }
+
   return (
     <View style={styles.container}>
       <Camera
@@ -78,15 +66,17 @@ export default function App() {
         type={type}
         zoom={zoom}
       >
-        <View style={styles.topButtons}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+        <View
+          style={{ ...styles.buttonsContainer, ...styles.topButtonsContainer }}
+        >
+          <TouchableOpacity style={styles.button} onPress={handleToGallery}>
             <MaterialIcons name="image" size={32}></MaterialIcons>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <MaterialIcons name="settings" size={32}></MaterialIcons>
           </TouchableOpacity>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={styles.buttonsContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <MaterialIcons name="tune" size={32}></MaterialIcons>
           </TouchableOpacity>
@@ -108,36 +98,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  camera: {
-    flex: 1,
-    justifyContent: "space-between",
-  },
-  topButtons: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    margin: 24,
-    marginTop: 32,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    margin: 24,
-  },
-  button: {
-    alignSelf: "center",
-    alignItems: "center",
-    backgroundColor: "#F2D404",
-    padding: 12,
-    borderRadius: 8,
-    marginHorizontal: 4,
-    borderColor: "#1E2329",
-    borderWidth: 2,
-  },
-});
+export default CameraScreen;
