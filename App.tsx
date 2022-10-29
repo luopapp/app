@@ -1,3 +1,4 @@
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Camera, CameraType } from "expo-camera";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -7,12 +8,10 @@ export default function App() {
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   if (!permission) {
-    // Camera permissions are still loading
     return <View />;
   }
 
   if (!permission.granted) {
-    // Camera permissions are not granted yet
     return (
       <View style={styles.container}>
         <Text style={{ textAlign: "center" }}>
@@ -32,9 +31,29 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Camera style={styles.camera} type={type}>
+        <View style={styles.topButtons}>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <MaterialIcons name="image" size={32}></MaterialIcons>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <MaterialIcons name="settings" size={32}></MaterialIcons>
+          </TouchableOpacity>
+        </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-            <Text style={styles.text}>Flip Camera</Text>
+            <MaterialIcons name="tune" size={32}></MaterialIcons>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <MaterialIcons name="invert-colors" size={32}></MaterialIcons>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <MaterialIcons name="photo-camera" size={42}></MaterialIcons>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <MaterialIcons name="zoom-out" size={32}></MaterialIcons>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <MaterialIcons name="zoom-in" size={32}></MaterialIcons>
           </TouchableOpacity>
         </View>
       </Camera>
@@ -49,21 +68,29 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
+    justifyContent: "space-between",
+  },
+  topButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    margin: 24,
+    marginTop: 32,
   },
   buttonContainer: {
-    flex: 1,
     flexDirection: "row",
-    backgroundColor: "transparent",
-    margin: 64,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    margin: 24,
   },
   button: {
-    flex: 1,
-    alignSelf: "flex-end",
+    alignSelf: "center",
     alignItems: "center",
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "white",
+    backgroundColor: "#F2D404",
+    padding: 12,
+    borderRadius: 8,
+    marginHorizontal: 4,
+    borderColor: "#1E2329",
+    borderWidth: 2,
   },
 });
