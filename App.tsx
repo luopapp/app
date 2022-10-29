@@ -1,27 +1,35 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Camera, CameraType } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function App() {
+  const [camera, setCamera] = useState<Camera | null>(null);
   const MAX_ZOOM = 1;
   const MIN_ZOOM = 0;
 
   const [type, setType] = useState(CameraType.back);
   const [zoom, setZoom] = useState(MIN_ZOOM);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [status, requestMediaLibraryPermission] = MediaLibrary.usePermissions();
 
   if (!permission) {
     return <View />;
   }
+  function requestPermissions() {
+    requestPermission();
+    requestMediaLibraryPermission();
+  }
 
-  if (!permission.granted) {
+  if (!permission.granted || !status?.granted) {
     return (
       <View style={styles.container}>
         <Text style={{ textAlign: "center" }}>
-          We need your permission to show the camera
+          Precisamos da sua permissão para mostrar a câmera e salvar novas
+          imagens
         </Text>
-        <Button onPress={requestPermission} title="Permitir acesso da câmera" />
+        <Button onPress={requestPermissions} title="Permitir acessos ao Luop" />
       </View>
     );
   }
@@ -48,9 +56,28 @@ export default function App() {
     });
   }
 
+  async function handleTakePicture() {
+    if (camera) {
+      const { uri } = await camera.takePictureAsync({});
+      const asset = await MediaLibrary.createAssetAsync(uri);
+      const album = await MediaLibrary.getAlbumAsync("luop");
+
+      if (album == null) {
+        await MediaLibrary.createAlbumAsync("luop", asset, false);
+      } else {
+        await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
+      }
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type} zoom={zoom}>
+      <Camera
+        style={styles.camera}
+        ref={(ref) => setCamera(ref)}
+        type={type}
+        zoom={zoom}
+      >
         <View style={styles.topButtons}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <MaterialIcons name="image" size={32}></MaterialIcons>
@@ -66,7 +93,7 @@ export default function App() {
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <MaterialIcons name="invert-colors" size={32}></MaterialIcons>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <TouchableOpacity style={styles.button} onPress={handleTakePicture}>
             <MaterialIcons name="photo-camera" size={42}></MaterialIcons>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={handleZoomOut}>
