@@ -4,7 +4,11 @@ import { useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function App() {
+  const MAX_ZOOM = 1;
+  const MIN_ZOOM = 0;
+
   const [type, setType] = useState(CameraType.back);
+  const [zoom, setZoom] = useState(MIN_ZOOM);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   if (!permission) {
@@ -17,7 +21,7 @@ export default function App() {
         <Text style={{ textAlign: "center" }}>
           We need your permission to show the camera
         </Text>
-        <Button onPress={requestPermission} title="grant permission" />
+        <Button onPress={requestPermission} title="Permitir acesso da câmera" />
       </View>
     );
   }
@@ -28,9 +32,25 @@ export default function App() {
     );
   }
 
+  function handleZoomIn() {
+    setZoom((current) => {
+      const newZoom = current + 0.1;
+
+      return newZoom < MAX_ZOOM ? newZoom : 0.1;
+    });
+  }
+
+  function handleZoomOut() {
+    setZoom((current) => {
+      const newZoom = current - 0.1;
+
+      return newZoom > MIN_ZOOM ? newZoom : 0.1;
+    });
+  }
+
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <Camera style={styles.camera} type={type} zoom={zoom}>
         <View style={styles.topButtons}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <MaterialIcons name="image" size={32}></MaterialIcons>
@@ -49,10 +69,10 @@ export default function App() {
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <MaterialIcons name="photo-camera" size={42}></MaterialIcons>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <TouchableOpacity style={styles.button} onPress={handleZoomOut}>
             <MaterialIcons name="zoom-out" size={32}></MaterialIcons>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <TouchableOpacity style={styles.button} onPress={handleZoomIn}>
             <MaterialIcons name="zoom-in" size={32}></MaterialIcons>
           </TouchableOpacity>
         </View>
