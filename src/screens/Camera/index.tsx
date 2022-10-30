@@ -1,6 +1,6 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { StackScreenProps } from "@react-navigation/stack";
-import { Camera, CameraType } from "expo-camera";
+import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
@@ -17,14 +17,7 @@ function CameraScreen({ navigation }: Props) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [type, setType] = useState(CameraType.back);
   const [zoom, setZoom] = useState(MIN_ZOOM);
-
-  function toggleCameraType() {
-    setType((current) =>
-      current === CameraType.back ? CameraType.front : CameraType.back
-    );
-  }
 
   function handleZoomIn() {
     setZoom((current) => {
@@ -62,29 +55,28 @@ function CameraScreen({ navigation }: Props) {
     navigation.push("gallery");
   }
 
+  function handleToSettings() {
+    navigation.push("settings");
+  }
+
   return (
     <View style={styles.container}>
-      <Camera
-        style={styles.camera}
-        ref={(ref) => setCamera(ref)}
-        type={type}
-        zoom={zoom}
-      >
+      <Camera style={styles.camera} ref={(ref) => setCamera(ref)} zoom={zoom}>
         <View
           style={{ ...styles.buttonsContainer, ...styles.topButtonsContainer }}
         >
           <TouchableOpacity style={styles.button} onPress={handleToGallery}>
             <MaterialIcons name="image" size={32}></MaterialIcons>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <TouchableOpacity style={styles.button} onPress={handleToSettings}>
             <MaterialIcons name="settings" size={32}></MaterialIcons>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <TouchableOpacity style={styles.button} onPress={() => {}}>
             <MaterialIcons name="tune" size={32}></MaterialIcons>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <TouchableOpacity style={styles.button} onPress={() => {}}>
             <MaterialIcons name="invert-colors" size={32}></MaterialIcons>
           </TouchableOpacity>
           <TouchableOpacity

@@ -5,11 +5,13 @@ import React from "react";
 import CameraScreen from "./screens/Camera";
 import GalleryScreen from "./screens/Gallery";
 import PermissionScreen from "./screens/Permission";
+import SettingsScreen from "./screens/settings";
 
 export type StackParamList = {
   permission: undefined;
   camera: undefined;
   gallery: undefined;
+  settings: undefined;
 };
 
 const Stack = createStackNavigator<StackParamList>();
@@ -31,6 +33,11 @@ function App() {
         <Stack.Screen
           name="gallery"
           component={GalleryScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="settings"
+          component={SettingsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
