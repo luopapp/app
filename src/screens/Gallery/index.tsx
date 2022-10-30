@@ -44,7 +44,6 @@ function GalleryScreen({ navigation }: Props) {
 
   function handleNextImage() {
     if (count > 0 && assets) {
-      console.log(count);
       const newCount = count - 1;
       setCount(newCount);
 
@@ -54,7 +53,6 @@ function GalleryScreen({ navigation }: Props) {
 
   function handleBackImage() {
     if (assets && count < assets?.length - 1) {
-      console.log(count);
       const newCount = count + 1;
       setCount(newCount);
 
