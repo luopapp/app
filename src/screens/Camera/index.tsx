@@ -15,6 +15,8 @@ function CameraScreen({ navigation }: Props) {
   const MAX_ZOOM = 1;
   const MIN_ZOOM = 0;
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [type, setType] = useState(CameraType.back);
   const [zoom, setZoom] = useState(MIN_ZOOM);
 
@@ -41,6 +43,7 @@ function CameraScreen({ navigation }: Props) {
   }
 
   async function handleTakePicture() {
+    setIsLoading(true);
     if (camera) {
       const { uri } = await camera.takePictureAsync({});
       const asset = await MediaLibrary.createAssetAsync(uri);
@@ -52,6 +55,7 @@ function CameraScreen({ navigation }: Props) {
         await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
       }
     }
+    setIsLoading(false);
   }
 
   function handleToGallery() {
@@ -83,7 +87,11 @@ function CameraScreen({ navigation }: Props) {
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <MaterialIcons name="invert-colors" size={32}></MaterialIcons>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleTakePicture}>
+          <TouchableOpacity
+            disabled={isLoading}
+            style={isLoading ? styles.buttonDisable : styles.button}
+            onPress={handleTakePicture}
+          >
             <MaterialIcons name="photo-camera" size={42}></MaterialIcons>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={handleZoomOut}>

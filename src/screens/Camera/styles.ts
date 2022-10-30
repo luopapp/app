@@ -31,4 +31,14 @@ export const styles = StyleSheet.create({
     borderColor: LUOP_COLORS.secondary,
     borderWidth: 2,
   },
+  buttonDisable: {
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: LUOP_COLORS.white,
+    padding: 12,
+    borderRadius: 8,
+    marginHorizontal: 4,
+    borderColor: LUOP_COLORS.secondary,
+    borderWidth: 2,
+  },
 });
