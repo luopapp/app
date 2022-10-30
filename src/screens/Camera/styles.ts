@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   topButtonsContainer: {
-    marginTop: 32,
     justifyContent: "space-between",
   },
   buttonsContainer: {

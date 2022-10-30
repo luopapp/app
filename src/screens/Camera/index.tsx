@@ -4,6 +4,7 @@ import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { StackParamList } from "../../App";
 import { styles } from "./styles";
@@ -60,7 +61,7 @@ function CameraScreen({ navigation }: Props) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Camera style={styles.camera} ref={(ref) => setCamera(ref)} zoom={zoom}>
         <View
           style={{ ...styles.buttonsContainer, ...styles.topButtonsContainer }}
@@ -94,7 +95,7 @@ function CameraScreen({ navigation }: Props) {
           </TouchableOpacity>
         </View>
       </Camera>
-    </View>
+    </SafeAreaView>
   );
 }
 
