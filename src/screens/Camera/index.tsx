@@ -6,7 +6,7 @@ import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { StackParamList } from "../../App";
+import { StackParamList } from "../../routes";
 // import { ConfigContext } from "../../contexts/config";
 import { styles } from "./styles";
 

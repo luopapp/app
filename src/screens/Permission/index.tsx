@@ -5,8 +5,8 @@ import * as MediaLibrary from "expo-media-library";
 import { useEffect } from "react";
 import { TouchableOpacity, Text, View, Animated, Easing } from "react-native";
 
-import { StackParamList } from "../../App";
 import { LUOP_COLORS } from "../../assets/colors";
+import { StackParamList } from "../../routes";
 import { styles } from "./styles";
 
 const AnimatedIcon = Animated.createAnimatedComponent(AntDesign);
