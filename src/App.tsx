@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
+import ConfigProvider from "./contexts/config";
 import CameraScreen from "./screens/Camera";
 import GalleryScreen from "./screens/Gallery";
 import PermissionScreen from "./screens/Permission";
@@ -19,28 +20,30 @@ const Stack = createStackNavigator<StackParamList>();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="permission"
-          component={PermissionScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="camera"
-          component={CameraScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="gallery"
-          component={GalleryScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="settings"
-          component={SettingsScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+      <ConfigProvider>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="permission"
+            component={PermissionScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="camera"
+            component={CameraScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="gallery"
+            component={GalleryScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="settings"
+            component={SettingsScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </ConfigProvider>
     </NavigationContainer>
   );
 }

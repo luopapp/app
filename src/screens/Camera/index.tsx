@@ -7,11 +7,13 @@ import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { StackParamList } from "../../App";
+// import { ConfigContext } from "../../contexts/config";
 import { styles } from "./styles";
 
 type Props = StackScreenProps<StackParamList>;
 
 function CameraScreen({ navigation }: Props) {
+  // const { colorSystem } = useContext(ConfigContext);
   const [camera, setCamera] = useState<Camera | null>(null);
   const MAX_ZOOM = 1;
   const MIN_ZOOM = 0;
