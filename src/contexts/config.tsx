@@ -6,17 +6,28 @@ import React, {
   useState,
 } from "react";
 
+export type SystemColorTypes = "Yellow" | "Blue" | "Red";
+
+export type ConfigContextType = {
+  systemColor: SystemColorTypes;
+  systemSoundActive: boolean;
+  updateSystemSoundActive: (state: boolean) => void;
+  updateSystemColor: (state: string) => void;
+};
+
 export const ConfigContext = createContext({});
 
 type ConfigProviderPropsType = object & PropsWithChildren;
 
 function ConfigProvider({ children }: ConfigProviderPropsType) {
-  const [systemColor, setSystemColor] = useState("yellow");
+  const [systemColor, setSystemColor] = useState<SystemColorTypes>("Yellow");
   const [systemSoundActive, setSystemSoundActive] = useState(false);
 
   async function getStoreSystemColor() {
     try {
-      const value = await AsyncStorage.getItem("@luop:system-color");
+      const value = (await AsyncStorage.getItem(
+        "@luop:system-color"
+      )) as SystemColorTypes;
 
       if (value) {
         setSystemColor(value);
@@ -54,7 +65,7 @@ function ConfigProvider({ children }: ConfigProviderPropsType) {
     }
   }
 
-  function updateSystemColor(state: string) {
+  function updateSystemColor(state: SystemColorTypes) {
     setStoreSystemColor(state);
     setSystemColor(state);
   }
