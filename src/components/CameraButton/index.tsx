@@ -3,6 +3,7 @@ import { Audio } from "expo-av";
 import { useContext } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+import { LuopColors } from "../../assets/colors";
 import { ConfigContext, ConfigContextType } from "../../contexts/config";
 import { styles } from "./styles";
 
@@ -50,12 +51,19 @@ export function CameraButton({
       style={{
         ...(disabled ? styles.buttonDisable : styles.button),
         ...styles[`button${systemColor}`],
-        ...(active && styles.buttonActive),
+        ...(active && {
+          backgroundColor: LuopColors.Neutro.Black,
+          borderColor: LuopColors[systemColor],
+        }),
       }}
       disabled={disabled}
       onPress={handleClick}
     >
-      <MaterialIcons name={icon} size={size}></MaterialIcons>
+      <MaterialIcons
+        name={icon}
+        size={size}
+        color={active ? LuopColors[systemColor] : LuopColors.Neutro.Black}
+      ></MaterialIcons>
     </TouchableOpacity>
   );
 }
