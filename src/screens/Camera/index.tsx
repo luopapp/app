@@ -18,6 +18,8 @@ function CameraScreen({ navigation }: Props) {
   const MIN_ZOOM = 0;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isInvertColor, setIsInvertColor] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [zoom, setZoom] = useState(MIN_ZOOM);
 
@@ -61,6 +63,16 @@ function CameraScreen({ navigation }: Props) {
     navigation.push("settings");
   }
 
+  function handleInvertColor() {
+    if (isInvertColor) setIsInvertColor(false);
+    else setIsInvertColor(true);
+  }
+
+  function handleFilters() {
+    if (isFilterOpen) setIsFilterOpen(false);
+    else setIsFilterOpen(true);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Camera style={styles.camera} ref={(ref) => setCamera(ref)} zoom={zoom}>
@@ -71,10 +83,16 @@ function CameraScreen({ navigation }: Props) {
           <CameraButton onClick={handleToSettings} icon="settings" size={32} />
         </View>
         <View style={styles.buttonsContainer}>
-          <CameraButton onClick={handleToGallery} icon="tune" size={32} />
           <CameraButton
-            onClick={handleToGallery}
+            onClick={handleFilters}
+            active={isFilterOpen}
+            icon="tune"
+            size={32}
+          />
+          <CameraButton
+            onClick={handleInvertColor}
             icon="invert-colors"
+            active={isInvertColor}
             size={32}
           />
           <CameraButton

@@ -31,4 +31,8 @@ export const styles = StyleSheet.create({
     borderColor: LuopColors.Neutro.Black,
     borderWidth: 2,
   },
+  buttonActive: {
+    backgroundColor: LuopColors.Neutro.White,
+    borderColor: LuopColors.Neutro.Black,
+  },
 });

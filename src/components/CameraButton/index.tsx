@@ -19,6 +19,7 @@ export type HeaderPropsType = {
     | "zoom-in";
   size: number;
   disabled?: boolean;
+  active?: boolean;
   onClick: () => void;
 };
 
@@ -26,6 +27,7 @@ export function CameraButton({
   disabled = false,
   size,
   icon,
+  active = false,
   onClick,
 }: HeaderPropsType) {
   const { systemColor, systemSoundActive } = useContext(
@@ -48,6 +50,7 @@ export function CameraButton({
       style={{
         ...(disabled ? styles.buttonDisable : styles.button),
         ...styles[`button${systemColor}`],
+        ...(active && styles.buttonActive),
       }}
       disabled={disabled}
       onPress={handleClick}
