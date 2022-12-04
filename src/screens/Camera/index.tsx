@@ -1,20 +1,19 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { StackScreenProps } from "@react-navigation/stack";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { CameraButton } from "../../components/CameraButton";
 import { StackParamList } from "../../routes";
-// import { ConfigContext } from "../../contexts/config";
 import { styles } from "./styles";
 
 type Props = StackScreenProps<StackParamList>;
 
 function CameraScreen({ navigation }: Props) {
-  // const { colorSystem } = useContext(ConfigContext);
   const [camera, setCamera] = useState<Camera | null>(null);
+
   const MAX_ZOOM = 1;
   const MIN_ZOOM = 0;
 
@@ -68,33 +67,24 @@ function CameraScreen({ navigation }: Props) {
         <View
           style={{ ...styles.buttonsContainer, ...styles.topButtonsContainer }}
         >
-          <TouchableOpacity style={styles.button} onPress={handleToGallery}>
-            <MaterialIcons name="image" size={32}></MaterialIcons>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleToSettings}>
-            <MaterialIcons name="settings" size={32}></MaterialIcons>
-          </TouchableOpacity>
+          <CameraButton onClick={handleToGallery} icon="image" size={32} />
+          <CameraButton onClick={handleToSettings} icon="settings" size={32} />
         </View>
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => {}}>
-            <MaterialIcons name="tune" size={32}></MaterialIcons>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => {}}>
-            <MaterialIcons name="invert-colors" size={32}></MaterialIcons>
-          </TouchableOpacity>
-          <TouchableOpacity
+          <CameraButton onClick={handleToGallery} icon="tune" size={32} />
+          <CameraButton
+            onClick={handleToGallery}
+            icon="invert-colors"
+            size={32}
+          />
+          <CameraButton
+            onClick={handleTakePicture}
+            icon="photo-camera"
             disabled={isLoading}
-            style={isLoading ? styles.buttonDisable : styles.button}
-            onPress={handleTakePicture}
-          >
-            <MaterialIcons name="photo-camera" size={42}></MaterialIcons>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleZoomOut}>
-            <MaterialIcons name="zoom-out" size={32}></MaterialIcons>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleZoomIn}>
-            <MaterialIcons name="zoom-in" size={32}></MaterialIcons>
-          </TouchableOpacity>
+            size={42}
+          />
+          <CameraButton onClick={handleZoomOut} icon="zoom-out" size={32} />
+          <CameraButton onClick={handleZoomIn} icon="zoom-in" size={32} />
         </View>
       </Camera>
     </SafeAreaView>
