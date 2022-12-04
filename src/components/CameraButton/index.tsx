@@ -1,12 +1,9 @@
 import { MaterialIcons } from "@expo/vector-icons/";
+import { Audio } from "expo-av";
 import { useContext } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import {
-  ConfigContext,
-  ConfigContextType,
-  SystemColorTypes,
-} from "../../contexts/config";
+import { ConfigContext, ConfigContextType } from "../../contexts/config";
 import { styles } from "./styles";
 
 export type HeaderPropsType = {
@@ -35,6 +32,18 @@ export function CameraButton({
     ConfigContext
   ) as ConfigContextType;
 
+  async function handleClick() {
+    console.log(systemSoundActive);
+    if (systemSoundActive) {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/ClickSound.mp3")
+      );
+      await sound.playAsync();
+    }
+
+    onClick();
+  }
+
   return (
     <TouchableOpacity
       style={{
@@ -42,7 +51,7 @@ export function CameraButton({
         ...styles[`button${systemColor}`],
       }}
       disabled={disabled}
-      onPress={onClick}
+      onPress={handleClick}
     >
       <MaterialIcons name={icon} size={size}></MaterialIcons>
     </TouchableOpacity>
