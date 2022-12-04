@@ -33,7 +33,6 @@ export function CameraButton({
   ) as ConfigContextType;
 
   async function handleClick() {
-    console.log(systemSoundActive);
     if (systemSoundActive) {
       const { sound } = await Audio.Sound.createAsync(
         require("../../assets/ClickSound.mp3")

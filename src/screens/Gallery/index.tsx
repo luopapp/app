@@ -1,16 +1,20 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { StackScreenProps } from "@react-navigation/stack";
 import * as MediaLibrary from "expo-media-library";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { Header } from "../../components/Header";
+import { ConfigContext, ConfigContextType } from "../../contexts/config";
 import { StackParamList } from "../../routes";
 import { styles } from "./styles";
 
 type Props = StackScreenProps<StackParamList>;
 
 function GalleryScreen({ navigation }: Props) {
+  const { systemColor } = useContext(ConfigContext) as ConfigContextType;
+
   const [album, setAlbum] = useState<MediaLibrary.Album>();
   const [assets, setAssets] = useState<MediaLibrary.Asset[]>();
   const [currentAsset, setCurrentAsset] = useState<MediaLibrary.Asset>();
@@ -62,12 +66,7 @@ function GalleryScreen({ navigation }: Props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.headerIcon} onPress={handleToCamera}>
-          <MaterialIcons name="arrow-back-ios" size={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Galeria</Text>
-      </View>
+      <Header title="Galeria" onBack={handleToCamera}></Header>
       {currentAsset && (
         <View>
           <Image
@@ -77,11 +76,23 @@ function GalleryScreen({ navigation }: Props) {
             }}
           ></Image>
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleBackImage}>
+            <TouchableOpacity
+              style={{
+                ...styles.button,
+                ...styles[`button${systemColor}`],
+              }}
+              onPress={handleBackImage}
+            >
               <MaterialIcons name="arrow-back-ios" size={18}></MaterialIcons>
               <Text style={styles.buttonText}>Anterior</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleNextImage}>
+            <TouchableOpacity
+              style={{
+                ...styles.button,
+                ...styles[`button${systemColor}`],
+              }}
+              onPress={handleNextImage}
+            >
               <Text style={styles.buttonText}>Próximo</Text>
               <MaterialIcons name="arrow-forward-ios" size={18}></MaterialIcons>
             </TouchableOpacity>
