@@ -1,33 +1,26 @@
 import { StyleSheet } from "react-native";
 
-import { LUOP_COLORS } from "../../assets/colors";
+import { LuopColors } from "../../assets/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: LUOP_COLORS.secondary,
+    backgroundColor: LuopColors.Neutro.Black,
   },
-  header: {
+  inputContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    padding: 16,
+    borderBottomColor: LuopColors.Neutro.White,
+    borderBottomWidth: 2,
+    paddingBottom: 8,
+    marginTop: 34,
+    marginHorizontal: 16,
   },
-  headerYellow: {
-    backgroundColor: LUOP_COLORS.primary,
-  },
-  headerBlue: {
-    backgroundColor: "#0420f2",
-  },
-  headerRed: {
-    backgroundColor: "#f20404",
-  },
-  headerIcon: {
-    paddingHorizontal: 8,
-  },
-  headerText: {
+  inputLabel: {
+    color: LuopColors.Neutro.White,
     fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: "500",
   },
   image: {
     width: "100%",
@@ -38,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: LUOP_COLORS.primary,
+    backgroundColor: LuopColors.Yellow,
     padding: 8,
     flexDirection: "row",
     justifyContent: "center",
@@ -48,6 +41,6 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
-    color: LUOP_COLORS.secondary,
+    color: LuopColors.Neutro.Black,
   },
 });

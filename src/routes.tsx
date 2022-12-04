@@ -4,7 +4,7 @@ import React from "react";
 import CameraScreen from "./screens/Camera";
 import GalleryScreen from "./screens/Gallery";
 import PermissionScreen from "./screens/Permission";
-import SettingsScreen from "./screens/settings";
+import SettingsScreen from "./screens/Settings";
 
 export type StackParamList = {
   permission: undefined;
