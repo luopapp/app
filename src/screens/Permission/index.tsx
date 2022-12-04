@@ -5,7 +5,7 @@ import * as MediaLibrary from "expo-media-library";
 import { useEffect } from "react";
 import { TouchableOpacity, Text, View, Animated, Easing } from "react-native";
 
-import { LUOP_COLORS } from "../../assets/colors";
+import { LuopColors } from "../../assets/colors";
 import { StackParamList } from "../../routes";
 import { styles } from "./styles";
 
@@ -56,7 +56,7 @@ function PermissionScreen({ navigation }: Props) {
           <AnimatedIcon
             name="loading1"
             size={48}
-            color={LUOP_COLORS.primary}
+            color={LuopColors.Yellow}
             style={{ transform: [{ rotate: animation }] }}
           ></AnimatedIcon>
         </View>

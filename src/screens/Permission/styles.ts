@@ -1,30 +1,30 @@
 import { StyleSheet } from "react-native";
 
-import { LUOP_COLORS } from "../../assets/colors";
+import { LuopColors } from "../../assets/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     padding: 32,
-    backgroundColor: LUOP_COLORS.secondary,
+    backgroundColor: LuopColors.Neutro.Black,
   },
   loaderContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 30,
-    backgroundColor: LUOP_COLORS.secondary,
+    backgroundColor: LuopColors.Neutro.Black,
   },
   title: {
-    color: LUOP_COLORS.white,
+    color: LuopColors.Neutro.White,
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 12,
   },
   subTitle: {
-    color: LUOP_COLORS.white,
+    color: LuopColors.Neutro.White,
     fontSize: 18,
     textAlign: "center",
     marginBottom: 12,
@@ -32,16 +32,16 @@ export const styles = StyleSheet.create({
   button: {
     alignSelf: "center",
     alignItems: "center",
-    backgroundColor: LUOP_COLORS.primary,
+    backgroundColor: LuopColors.Yellow,
     padding: 12,
     borderRadius: 8,
     marginHorizontal: 4,
-    borderColor: "#1E2329",
+    borderColor: LuopColors.Neutro.Black,
     borderWidth: 2,
     marginTop: 12,
   },
   buttonText: {
-    color: LUOP_COLORS.secondary,
+    color: LuopColors.Neutro.Black,
     fontWeight: "bold",
     fontSize: 24,
     paddingHorizontal: 24,
