@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Luop",
-    "slug": "Electronic magnifying glass app",
+    "slug": "luop-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.luweslen.luopapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +39,11 @@
           "isAccessMediaLocationEnabled": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1d752753-f720-49e6-a7ac-51bea0c7c061"
+      }
+    }
   }
 }
